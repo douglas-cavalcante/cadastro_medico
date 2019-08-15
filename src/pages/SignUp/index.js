@@ -36,21 +36,19 @@ export default function SignUp({ navigation }) {
     } else if (!senha) {
       Alert.alert('Aviso', 'Senha é obrigatória');
     } else {
-      aqui;
+      navigation.navigate('Termos', {
+        usuario: {
+          nome,
+          email,
+          cpf,
+          estado,
+          tipo,
+          crm,
+          cnes,
+          senha,
+        },
+      });
     }
-
-    navigation.navigate('Termos', {
-      usuario: {
-        nome,
-        email,
-        cpf,
-        estado,
-        tipo,
-        crm,
-        cnes,
-        senha,
-      },
-    });
   }
 
   return (
