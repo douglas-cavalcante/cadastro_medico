@@ -21,7 +21,7 @@ export default function SignUp({ navigation }) {
   const [cnes, setCnes] = useState('');
 
   function handleSubmit() {
-    /* if (!nome) {
+    if (!nome) {
       Alert.alert('Aviso', 'Nome é obrigatório');
     } else if (!email) {
       Alert.alert('Aviso', 'Email é obrigatório');
@@ -36,10 +36,9 @@ export default function SignUp({ navigation }) {
     } else if (!senha) {
       Alert.alert('Aviso', 'Senha é obrigatória');
     } else {
-      aqui
+      aqui;
     }
 
-     */
     navigation.navigate('Termos', {
       usuario: {
         nome,
