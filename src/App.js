@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import NavigationService from './services/navigation';
 
 import createRouter from './routes';
+
+import { checkLogin } from './store/modules/auth/actions';
 
 const theme = {
   ...DefaultTheme,
@@ -13,7 +16,14 @@ const theme = {
 };
 
 const App = () => {
-  const Routes = createRouter();
+  const dispatch = useDispatch();
+  const signed = useSelector(state => state.auth.signed);
+  const Routes = createRouter(signed);
+
+  useEffect(() => {
+    dispatch(checkLogin());
+  });
+
   return (
     <PaperProvider theme={theme}>
       <Routes

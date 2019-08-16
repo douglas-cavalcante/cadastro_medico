@@ -1,5 +1,4 @@
 import { Alert } from 'react-native';
-import { NavigationActions } from 'react-navigation';
 import firebase from '../../../config/firebase';
 import NavigationService from '../../../services/navigation';
 
@@ -65,3 +64,58 @@ export function signUpRequest(data) {
       });
   };
 }
+
+export const signInRequest = (email, senha) => {
+  return dispatch => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, senha)
+      .then(() => {
+        const { uid, emailVerified } = firebase.auth().currentUser;
+        if (emailVerified) {
+          dispatch({
+            type: '@auth/AlterarUid',
+            payload: {
+              uid,
+            },
+          });
+        } else {
+          Alert.alert('Aviso', 'Realize a confirmação de email.');
+        }
+      })
+      .catch(error => {
+        switch (error.code) {
+          case 'auth/invalid-email':
+            Alert.alert('Aviso', 'Email inválido');
+            break;
+          case 'auth/user-disabled':
+            Alert.alert('Aviso', 'Usuário desativado');
+            break;
+          case 'auth/user-not-found':
+            Alert.alert('Aviso', 'Usuário não existe');
+            break;
+          case 'auth/wrong-password':
+            Alert.alert('Aviso', 'Email e/ou senha errados!!!');
+            break;
+          default:
+            Alert.alert('Aviso', 'Erro ao tentar realizar o Login');
+            break;
+        }
+      });
+  };
+};
+
+export const checkLogin = () => {
+  return dispatch => {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        dispatch({
+          type: '@auth/AlterarUid',
+          payload: {
+            uid: user.uid,
+          },
+        });
+      }
+    });
+  };
+};

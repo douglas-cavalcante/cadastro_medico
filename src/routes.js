@@ -3,11 +3,15 @@ import {
   createAppContainer,
   createSwitchNavigator,
   createStackNavigator,
+  createDrawerNavigator,
 } from 'react-navigation';
 
 import SignIn from '~/pages/SignIn';
 import SignUp from '~/pages/SignUp';
 import Termos from '~/pages/Termos';
+
+import Dashboard from '~/pages/Dashboard';
+import CustomDrawerContentComponent from './components/Drawer';
 
 export default (isSigned = false) =>
   createAppContainer(
@@ -31,9 +35,17 @@ export default (isSigned = false) =>
             },
           }
         ),
+        App: createDrawerNavigator(
+          {
+            Dashboard,
+          },
+          {
+            contentComponent: CustomDrawerContentComponent,
+          }
+        ),
       },
       {
-        initialRouteName: isSigned ? 'Sign' : 'Sign',
+        initialRouteName: isSigned ? 'App' : 'Sign',
       }
     )
   );
