@@ -9,6 +9,7 @@ import {
 import SignIn from '~/pages/SignIn';
 import SignUp from '~/pages/SignUp';
 import Termos from '~/pages/Termos';
+import EsqueciSenha from '~/pages/EsqueciSenha';
 
 import Dashboard from '~/pages/Dashboard';
 import CustomDrawerContentComponent from './components/Drawer';
@@ -22,6 +23,7 @@ export default (isSigned = false) =>
             SignIn,
             SignUp,
             Termos,
+            EsqueciSenha,
           },
           {
             defaultNavigationOptions: {

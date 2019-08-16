@@ -119,3 +119,37 @@ export const checkLogin = () => {
     });
   };
 };
+
+export const SignOut = () => {
+  return dispatch => {
+    firebase.auth().signOut();
+    dispatch({
+      type: '@auth/Logout',
+      payload: {},
+    });
+  };
+};
+
+export const recuperarSenhaRequest = email => {
+  return _dispatch => {
+    firebase
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        Alert.alert(
+          'Aviso',
+          'Verifique sua caixa de email !',
+          [
+            {
+              text: 'OK',
+              onPress: () => NavigationService.navigate('SignIn'),
+            },
+          ],
+          { cancelable: false }
+        );
+      })
+      .catch(_error => {
+        Alert.alert('Erro', 'Tente novamente mais tarde');
+      });
+  };
+};

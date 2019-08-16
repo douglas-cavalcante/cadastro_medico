@@ -56,6 +56,12 @@ export default function SignIn({ navigation }) {
         >
           <Text>NÃO TEM CONTA? CADASTRE-SE</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={{}}
+          onPress={() => navigation.navigate('EsqueciSenha')}
+        >
+          <Text style={{ fontSize: 12 }}>Esqueci minha senha</Text>
+        </TouchableOpacity>
       </Container>
     </Background>
   );

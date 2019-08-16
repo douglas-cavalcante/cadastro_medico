@@ -13,6 +13,11 @@ export default function auth(state = INITIAL_STATE, action) {
         draft.signed = true;
         break;
       }
+      case '@auth/Logout': {
+        draft.uid = null;
+        draft.signed = false;
+        break;
+      }
       default:
     }
   });
